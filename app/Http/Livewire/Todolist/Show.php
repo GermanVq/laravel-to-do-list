@@ -20,7 +20,7 @@ class Show extends Component
     public $showCreateModal = false;
     public $showDeleteModalConfirmation = false;
 
-    public $perPage = 2;
+    public $perPage = 5;
     public $search = '';
 
 
