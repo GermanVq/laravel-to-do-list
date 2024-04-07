@@ -32,7 +32,7 @@
                     <input type="search" id="default-search" wire:model.debounce.200ms="search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Buscar tareas..." required />
                 </div>
             </div>
-            <div class="flow-root" x-data="{ tasks: [] }" x-init="tasks = {{ json_encode($tasks) }}">
+            <div class="flow-root" x-data="{ tasks: [] }" x-init="tasks = {{ json_encode($tasks->items()) }}">
                 <template x-for="(task, index) in tasks" :key="index">
                     <div class="border-2 border-black px-5 py-4 rounded-2xl mb-8" :class="{'bg-green-100': task.completed, 'bg-red-100': !task.completed}">
                         <div class="flex justify-between">
@@ -63,6 +63,7 @@
                         </div>
                     </div>
                 </template>
+                {{ $tasks->links() }}
             </div>
         </div>
     </div>

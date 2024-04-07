@@ -5,9 +5,11 @@ namespace App\Http\Livewire\Todolist;
 use App\Http\Requests\Task\StoreRequest;
 use App\Models\Task;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Show extends Component
 {
+    use WithPagination;
 
     public $title;
     public $completed;
@@ -18,8 +20,14 @@ class Show extends Component
     public $showCreateModal = false;
     public $showDeleteModalConfirmation = false;
 
-    public $perPage = 10;
+    public $perPage = 2;
     public $search = '';
+
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
     public function rules(): array
     {
@@ -30,7 +38,7 @@ class Show extends Component
     public function render()
     {
         $tasks = Task::where('title', 'like', '%' . $this->search . '%')
-            ->orWhere('description', 'like', '%' . $this->search . '%')->get();
+            ->orWhere('description', 'like', '%' . $this->search . '%')->paginate($this->perPage);
 
         return view('livewire.todolist.show', ['tasks' => $tasks]);
     }
