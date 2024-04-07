@@ -94,6 +94,15 @@ El servidor se ejecutará por defecto en http://localhost:8000.
 
 ## Quick install Docker
 
+Clonar el repositorio:
+
+```bash
+git clone https://github.com/GermanVq/laravel-to-do-list.git
+
+cd laravel-to-do-list
+
+```
+
 Mondando contenedor
 
 ```bash
