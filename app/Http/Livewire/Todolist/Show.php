@@ -63,5 +63,11 @@ class Show extends Component
         $this->showDeleteModalConfirmation = false;
     }
 
+    public function toggleTask($id, $completed)
+    {
+
+        Task::find($id)->update(['completed' => $completed]);
+    }
+
 
 }

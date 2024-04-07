@@ -1,4 +1,4 @@
-<div >
+<div>
     <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
         <x-application-logo class="block h-12 w-auto" />
 
@@ -7,9 +7,9 @@
         </h1>
 
     </div>
-    <div class="w-full  p-4  bg-white border border-gray-100 rounded-lg shadow sm:p-8">
+    <div class="w-full">
         <div
-            class="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+            class="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-900 dark:border-gray-700">
             <div class="flex items-center justify-between mb-4">
                 <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Listado de Tareas</h5>
                 <div class="flex justify-between mb-8">
@@ -22,11 +22,12 @@
             </div>
             <div class="flow-root">
                 @foreach ($tasks as $task)
-                    <div class="border-2 border-black px-5 py-4 rounded-2xl bg-green-100 mb-8">
+                    <div class="border-2 border-black px-5 py-4 rounded-2xl bg-{{$task->completed ? 'green' : 'red'}}-100 mb-8">
                         <div class="flex justify-between">
                             <div class="text-gray-600">Fecha de creación: {{ $task->created_at }}</div>
                             <div class="text-gray-600">
-                                <button wire:click="showDeleteModalConfirmation({{$task->id}})" class="icon hover:text-red-500">
+                                <button wire:click="showDeleteModalConfirmation({{ $task->id }})"
+                                    class="icon hover:text-red-500">
                                     <i>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -38,18 +39,18 @@
                             </div>
                         </div>
                         <div class="flex space-x-2 items-center mb-5">
-                            <input id="checkbox-{{ $task->id }}" type="checkbox" value=""
+                            <input {{$task->completed ? 'checked' : ''}} id="checkbox-{{ $task->id }}" type="checkbox" wire:change="toggleTask({{ $task->id }}, {{$task->completed ? 'false': 'true'}})"
                                 class="w-4 h-4 text-blue-600 bg-white-100 border-white-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-white-800 focus:ring-2 dark:bg-white-700 dark:border-white-600">
-                            <div class="font-semibold text-lg">{{ $task->title }}</div>
+                            <div class="font-semibold text-lg"  style="{{$task->completed ? 'text-decoration: line-through': ''}}">{{ $task->title }}</div>
                         </div>
                         <div class=" text-gray-600">
-                            <p>{{ $task->description }}</p>
+                            <p style="{{$task->completed ? 'text-decoration: line-through': ''}}">{{ $task->description }}</p>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
-        </div>
+    </div>
 
 
     <x-modal id="taskModal" maxWidth="lg" wire:model="showCreateModal">
@@ -80,15 +81,19 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titulo</label>
                             <input id="title" type="text" wire:model="title" id="task-title"
                                 class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                @error('title') <span class="text-red-200 error">{{ $message }}</span> @enderror
+                            @error('title')
+                                <span class="text-red-200 error">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="mb-5">
                             <label for="description"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
-                            <textarea id="description" wire:model="description"  id="task-description" rows="4"
+                            <textarea id="description" wire:model="description" id="task-description" rows="4"
                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Descripción de la tarea..."></textarea>
-                                @error('description') <span class="error">{{ $message }}</span> @enderror
+                            @error('description')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
                         </div>
                     </form>
                 </div>
