@@ -10,21 +10,22 @@
 ## About Laravel
 
 ## TO-DO LIST
+
 Este es un proyecto desarrollado con Laravel 9. Este README proporciona los pasos necesarios para ejecutar el proyecto localmente.
 
 ## Requisitos
-PHP >= 8.0
-Composer
-Node.js >= 14.x
-NPM o Yarn
-Servidor de base de datos (MySQL, PostgreSQL, SQLite, etc.)
-Instalación
+
+PHP >= 8.0<br>
+Composer<br>
+Node.js >= 14.x<br>
+NPM o Yarn<br>
+Servidor de base de datos (MySQL)<br>
+Instalación<br>
+
+## Quick install
+
 Clonar el repositorio:
 
-##  Quick install
-
-
-Clonando proyecto:
 ```bash
 git clone https://github.com/GermanVq/laravel-to-do-list.git
 
@@ -33,17 +34,22 @@ cd laravel-to-do-list
 ```
 
 Instalando composer:
-```bash 
+
+```bash
 composer install
 
 ```
+
 Copiar el archivo de configuración:
-```bash 
+
+```bash
 cp .env.example .env
 
 ```
+
 Generar la clave de la aplicación:
-```bash 
+
+```bash
 php artisan key:generate
 
 ```
@@ -54,35 +60,99 @@ Abrir el archivo .env y configurar las credenciales de la base de datos.
 `
 
 Ejecutar las migraciones y semillas:
-```bash 
+
+```bash
 php artisan migrate
 
 ```
 
 Instalar dependencias de frontend:
-```bash 
+
+```bash
 npm install
 ```
 o
 
-```bash 
+```bash
 yarn
 ```
+
 Corremos dependencias de front
-```bash 
+
+```bash
 npm run dev
 ```
 
-
 Ejecución
 Para ejecutar el servidor de desarrollo de Laravel, utiliza el siguiente comando:
-```bash 
+
+```bash
 php artisan serve
 ```
 
-
 El servidor se ejecutará por defecto en http://localhost:8000.
 
+## Quick install Docker
+
+Mondando contenedor
+
+```bash
+docker compose up -d
+```
+
+Ejecutando Composer
+
+```bash
+docker exec -it php_todo composer install
+```
+
+Copiar el archivo de configuración:
+
+```bash
+cp .env.example .env
+
+```
+
+Generar la clave de la aplicación:
+
+```bash
+php artisan key:generate
+
+```
+
+Ejecutar las migraciones y semillas:
+
+```bash
+php artisan migrate
+
+```
+
+Instalar dependencias de frontend:
+
+```bash
+npm install
+```
+
+o
+
+```bash
+yarn
+```
+
+Corremos dependencias de front
+
+```bash
+npm run dev
+```
+
+Ejecución
+Para ejecutar el servidor de desarrollo de Laravel, utiliza el siguiente comando:
+
+```bash
+php artisan serve
+```
+
+El servidor se ejecutará por defecto en http://localhost:8000.
 
 ## License
 
