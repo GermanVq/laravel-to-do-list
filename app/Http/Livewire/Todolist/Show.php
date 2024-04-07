@@ -18,6 +18,9 @@ class Show extends Component
     public $showCreateModal = false;
     public $showDeleteModalConfirmation = false;
 
+    public $perPage = 10;
+    public $search = '';
+
     public function rules(): array
     {
         return (new StoreRequest())->rules();
@@ -26,8 +29,10 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.todolist.show', ['tasks' => Task::all()]);
+        $tasks = Task::where('title', 'like', '%' . $this->search . '%')
+            ->orWhere('description', 'like', '%' . $this->search . '%')->get();
 
+        return view('livewire.todolist.show', ['tasks' => $tasks]);
     }
 
     public function addTask()
@@ -62,10 +67,9 @@ class Show extends Component
         Task::find($id)->update(['completed' => $completed]);
     }
 
-    public function showConfirmation($id){
+    public function showConfirmation($id)
+    {
         $this->taskId = $id;
         $this->showDeleteModalConfirmation = true;
     }
-
-
 }
