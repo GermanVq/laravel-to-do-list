@@ -13,7 +13,7 @@ class Show extends Component
     public $completed;
     public $description;
 
-
+    public $show = false;
     public $taskId;
     public $showCreateModal = false;
     public $showDeleteModalConfirmation = false;
@@ -50,13 +50,6 @@ class Show extends Component
         $this->showCreateModal = true;
     }
 
-    public function showDeleteModalConfirmation($id)
-    {
-
-        $this->taskId = $id;
-        $this->showDeleteModalConfirmation = true;
-    }
-
     public function deleteTask()
     {
         Task::find($this->taskId)->delete();
@@ -67,6 +60,11 @@ class Show extends Component
     {
 
         Task::find($id)->update(['completed' => $completed]);
+    }
+
+    public function showConfirmation($id){
+        $this->taskId = $id;
+        $this->showDeleteModalConfirmation = true;
     }
 
 
